@@ -4,6 +4,7 @@ import telemach.rest.message.AppMessages;
 import telemach.rest.model.*;
 
 import java.lang.reflect.Field;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class RestController {
 	@Autowired
 	private JdbcTempQuery jdbcTempQuery; 
 	
-	HashMap<String, Boolean> servicesMap = new HashMap<String, Boolean>();
+	private static HashMap<String, Boolean> servicesMap = new HashMap<String, Boolean>();
 	
-	{
+	static {
 		servicesMap.put("Internet", true);
 		servicesMap.put("Telefon", true);
 		servicesMap.put("Televizija", true);
@@ -121,7 +122,7 @@ public class RestController {
 		try {
 			ValidationResult validationResult = this.validateObjectForInsert(address);
 			if(!validationResult.validated) {			
-				resp.setResult(replacePlaceholder(AppMessages.REQ_ADDRESS_FIELD, validationResult.fieldName));
+				resp.setResult(MessageFormat.format(AppMessages.REQ_ADDRESS_FIELD, validationResult.fieldName));
 				return resp;
 			}
 			
@@ -226,7 +227,7 @@ public class RestController {
 		try {
 			ValidationResult validationResult = this.validateObjectForInsert(service);
 			if(!validationResult.validated) {			
-				resp.setResult(replacePlaceholder(AppMessages.REQ_SERVICE_FIELD, validationResult.fieldName));
+				resp.setResult(MessageFormat.format(AppMessages.REQ_SERVICE_FIELD, validationResult.fieldName));			
 				return resp;
 			}
 			
@@ -354,16 +355,5 @@ public class RestController {
 			this.fieldName = fieldName;
 		}
 	}
-	private String replacePlaceholder(String strToFormat, String valueToInsert) {
-		
-		int position = strToFormat.indexOf("{}");
-		
-		if(position == -1) {
-			return strToFormat;
-		}else {
-			
-			return strToFormat.substring(0, position) + valueToInsert + " " + strToFormat.substring(position + 3, strToFormat.length());
-		}
-		
-	}
+	
 }

@@ -40,9 +40,9 @@ public class AppMessages {
 	
 	public static final String REQ_ADDRESS_SELECTBYFIELD = "Selecting addresses by field (other than id) has been requested";
 	
-	public static final String REQ_ADDRESS_FIELD = "Required Address object field {} has not been set";
+	public static final String REQ_ADDRESS_FIELD = "Required Address object field {0} has not been set";
 	
-	public static final String REQ_SERVICE_FIELD = "Required Service object field {} has not been set";
+	public static final String REQ_SERVICE_FIELD = "Required Service object field {0} has not been set";
 	
 	public static final String APP_INFO = "This is a simple Spring Boot application demonstrating REST services!";
 	
